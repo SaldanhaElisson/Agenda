@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack -w",
-    "star": "nodemon serve.js --ignore public --ignore frontend"
+    "start": "nodemon server.js --ignore public --ignore frontend"
   },
   "keywords": [],
   "author": "",
