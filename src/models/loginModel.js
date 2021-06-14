@@ -20,7 +20,7 @@ class Login { // validar os dados
         this.valida()
         if(this.erros.length > 0) return //-> se tiver algum erro vai dá ruim
         
-        this.user = await LoginModel.findOne({email:this.body.email}); //-> verificar se existe o usuario
+        this.user = await LoginModel.findOne({email:this.body.email}); //-> verificar se existe o usuario no banco de dados
 
         if(!this.user){
             this.erros.push('Usuario não existe');
@@ -71,14 +71,14 @@ class Login { // validar os dados
         for(const key in this.body){
             if(typeof this.body[key] !== 'string'){
                 this.body[key] = ""
-            }
+            } // -> limpando os campos
         }
 
 
         this.body = {
             email: this.body.email,
             password: this.body.password
-        }
+        } //-> garantindo que o campo irá receber corretamente os dados
 
     
     }

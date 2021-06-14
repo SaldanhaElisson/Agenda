@@ -49,7 +49,7 @@ exports.login = async function(req, res) {
         return;
     }
      req.flash('success', 'Logado com sucesso');
-        req.session.user = login.user;
+        req.session.user = login.user; // dizendo que usuario é aquele
          req.session.save(function () {
          res.redirect('/') // -> redirecionando a pagina para voltar (pagina login)
      });
@@ -61,7 +61,7 @@ exports.login = async function(req, res) {
  }
 
  exports.logout = function(req, res){
-    req.session.destroy();
+    req.session.destroy(); //-> deslogando a conta
     res.redirect('/')
  }
 
