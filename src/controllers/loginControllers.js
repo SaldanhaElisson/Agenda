@@ -9,7 +9,7 @@ exports.register = async function(req, res) {
    try{
     const login = new Login(req.body)
     await login.register();
-    console.log(req.body)
+    
 
     if(login.erros.length >0) {
         req.flash('erros', login.erros);
@@ -33,7 +33,6 @@ exports.login = async function(req, res) {
     try{
      const login = new Login(req.body)
      await login.login();
-     console.log(req.body)
  
      if(login.erros.length >0) {
          req.flash('erros', login.erros);

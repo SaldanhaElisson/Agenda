@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
-const bcryptjs = require('bcryptjs')
+const validator = require('validator') //-> verificar se email é valido
+const bcryptjs = require('bcryptjs') // -> tranforma a senha rash (parece com criptografia)
 
 const loginSchema = new mongoose.Schema({
    email: {type: String, required:true}, //-> tipo string e obrigatorio
@@ -19,7 +19,7 @@ class Login { // validar os dados
     async login(){
         this.valida()
         if(this.erros.length > 0) return //-> se tiver algum erro vai dá ruim
-        console.log(this.erros.length)
+        
         this.user = await LoginModel.findOne({email:this.body.email}); //-> verificar se existe o usuario
 
         if(!this.user){
@@ -31,7 +31,7 @@ class Login { // validar os dados
             this.erros.push('Senha inválida')
             this.user = null;
             return;
-        } //verificando se a senha que foi enviada no logim é a mesma senha no banco de dados
+        } //verificando se a senha que foi enviada no login é a mesma senha no banco de dados
 
     }
 
@@ -44,9 +44,9 @@ class Login { // validar os dados
 
         await this.userExists(); //_. checar se o usario existe
 
-            const salt = bcryptjs.genSaltSync(); //- gerando rash (parece com criptografada)
-            this.body.password = bcryptjs.hashSync(this.body.password, salt)  // -> fazendo com que nossa senha seja gerada um rash
-            this.use = await LoginModel.create(this.body) // -> criando o usuario 
+        const salt = bcryptjs.genSaltSync(); //- gerando rash (parece com criptografada)
+        this.body.password = bcryptjs.hashSync(this.body.password, salt)  // -> fazendo com que nossa senha seja gerada um rash
+        this.use = await LoginModel.create(this.body) // -> criando o usuario 
     } 
 
     async userExists(){
